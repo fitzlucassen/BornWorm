@@ -47,7 +47,7 @@ MapsController.prototype.getGeolocalisation = function(){
 
 MapsController.prototype.putMarker = function (event) {
     var title = "Essai numéro " + this.nbEssai;
-    this.nbEssai++;;
+    this.nbEssai++;
     
     // Création du Marker
     var myMarker = new google.maps.Marker({
