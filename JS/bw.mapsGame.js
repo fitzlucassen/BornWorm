@@ -12,6 +12,7 @@ $(document).ready(function () {
     
     $('#layout').on('click', '.nbFriends', function(){
 	initializeMaps();
+        Facebook.takeXFriends(Facebook.response, $(this).val());
     });
 });
 	

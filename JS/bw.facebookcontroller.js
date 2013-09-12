@@ -5,31 +5,14 @@ function FacebookController() {
 FacebookController.prototype.getFriends = function() {
     var $this = this;
     FB.api('/me/friends', {fields: 'name,id,location,birthday,hometown'}, function (response) {
-	var divTarget = $('.friends-list-container');
-	var data = response.data;
-	$this.response = data;
-	for (var i = 0; i < data.length; i++) {
-	    var firstname = data[i].name.split(" ")[0];
-	    var lastname = "";
-	    var lastnameArray = data[i].name.split(" ");
-	    
-	    lastnameArray.splice(lastnameArray[0], 1);
-	    for (var j = 0; j < lastnameArray.length; j++) {
-		lastname += lastnameArray[j] + " ";
-	    }
-	    if (firstname.length > 13) {
-		firstname = firstname.substring(0, 13);
-		firstname += "...";
-	    }
-	    if (lastname.length > 13) {
-		lastname = lastname.substring(0, 13);
-		lastname += "...";
-	    }
-	    var divContainer = $('<div>', { id: data[i].id });
-	    
-	    divContainer.html('<a href="#" class="fb-friend-img" ><img width="40" height="40" src="http://graph.facebook.com/' + data[i].id + '/picture" /></a><a href="#" class="fb-friend-name">' + firstname + '<br />' + lastname + '</a>');
-	    divTarget.append(divContainer);
-	}
+	var friendsToFind = [];
+        var data = response.data;
+        for (var i = 0; i < data.length; i++) {
+            if($this.hasHometownAndLocation(data[i])){
+                friendsToFind.push({name: data[i].name, hometown: data[i].hometown.name, location: data[i].location.name});
+            }
+        }
+        $this.response = friendsToFind;
     });
 }
 
@@ -48,8 +31,20 @@ FacebookController.prototype.connect = function() {
     },{scope: 'friends_location, friends_hometown'});
 }
 
-FacebookController.prototype.hasHometownFriend = function() {
-    
+FacebookController.prototype.hasHometownAndLocation = function(friend) {
+    if(friend.hometown == null || friend.location == null)
+        return false;
+    return true;
+}
+
+FacebookController.prototype.takeXFriends = function(friends, limit) {
+    var limitFriends = limit;
+    var arrayFriend = new Array();
+    arrayFriend = friends;
+    do{
+        var unluckyFriendIndex = Math.random() * (friends.length - 0) + 0;
+        arrayFriend.splice(unluckyFriendIndex, 1);
+    }while(friends.length > limitFriends)
 }
 
 FacebookController.prototype.share = function() {
