@@ -11,6 +11,10 @@ header{
 #layout{
 	min-height: 600px;
 }
-#explanation{
+#explanation, #result, #friend{
     display: none;
+}
+
+#friend span#friendName{
+    font-weight: bold;
 }

@@ -12,11 +12,12 @@ function MapsController(){
     };
     this.markerImageBorn = new google.maps.MarkerImage('Images/maps-marker-bleu.png');
     this.markerImageNow = new google.maps.MarkerImage('Images/maps-marker-rose.png');
+    this.currentMarker = {};
     this.map = {};
     this.nbEssai = 1;
 }
 
-MapsController.prototype.initialyze = function (friends) {
+MapsController.prototype.initialyze = function (friend) {
     if ($('#position').attr('data-lat') != "") {
 	this.coordonnees.lat = $('#position').attr('data-lat');
 	this.coordonnees.lng = $('#position').attr('data-lng');
@@ -31,7 +32,7 @@ MapsController.prototype.initialyze = function (friends) {
 	$this.putMarker(event);
     });
     
-    $this.createMarkerFriends(friends);
+    $this.createMarkerFriend(friend);
 }
 
 MapsController.prototype.getGeolocalisation = function(){
@@ -53,10 +54,12 @@ MapsController.prototype.getGeolocalisation = function(){
 }
 
 MapsController.prototype.putMarker = function (event) {
+    // Pour title du marqueur d'essai
+    var $this = this;
     var title = "Essai numéro " + this.nbEssai;
     this.nbEssai++;
     
-    // Création du Marker
+    // Création du Marker d'essai
     var myMarker = new google.maps.Marker({
 	// Coordonnées
 	position: event.latLng,
@@ -64,35 +67,64 @@ MapsController.prototype.putMarker = function (event) {
 	title: title,
 	icon: this.markerImageNow
     });
-    this.map.panTo(event.latLng);
+    
+    // Création du Marker réel de naissance
+    var GeocoderOptions = {
+	'address' : Facebook.response[cptFriends-1].hometown,
+	'region' : 'France'
+    }
+    var myGeocoder = new google.maps.Geocoder();
+    myGeocoder.geocode(GeocoderOptions, function(results, status){
+	// Si la recher à fonctionné
+	if(status == google.maps.GeocoderStatus.OK) {
+	    // Création du Marker
+	    var marker = new google.maps.Marker({
+		// Coordonnées
+		position: results[0].geometry.location,
+		map: $this.map,
+		title: 'Facebook.response[cpt].name',
+		icon: $this.markerImageBorn
+	    });
+	    $('#distance').html($this.getDistance(event.latLng, marker.position));
+	    $('#result').fadeIn('slow');
+	}
+    });
 }
 
-MapsController.prototype.createMarkerFriends = function (friends) {
+MapsController.prototype.createMarkerFriend = function (friend) {
     var $this = this;
-    var cpt = 0;
-    for(cpt = 0; cpt < friends.length; cpt++){
-	var adresse = friends[cpt].hometown.name;
-	
-	var GeocoderOptions = {
-	    'address' : adresse.split(',').first().trim(),
-	    'region' : adresse.split(',').last().trim()
-	}
-	
-	var myGeocoder = new google.maps.Geocoder();
-	myGeocoder.geocode(GeocoderOptions, function(results, status){
-	    // Si la recher à fonctionné
-	    if(status == google.maps.GeocoderStatus.OK) {
-		// S'il existait déjà un marker sur la map,
-		// on l'enlève
-		// Création du Marker
-		var myMarker = new google.maps.Marker({
-		    // Coordonnées
-		    position: results[0].geometry.location,
-		    map: this.map,
-		    title: title,
-		    icon: $this.markerImageBorn
-		});
-	    }
-	});
+    var adresse = friend.location;
+
+    var GeocoderOptions = {
+	'address' : adresse.split(',').first().trim(),
+	'region' : adresse.split(',').last().trim()
     }
+
+    var myGeocoder = new google.maps.Geocoder();
+    myGeocoder.geocode(GeocoderOptions, function(results, status){
+	// Si la recher à fonctionné
+	if(status == google.maps.GeocoderStatus.OK) {
+	    // Création du Marker
+	    var myMarker = new google.maps.Marker({
+		// Coordonnées
+		position: results[0].geometry.location,
+		map: $this.map,
+		title: 'Facebook.response[cpt].name',
+		icon: $this.markerImageBorn
+	    });
+	}
+    });
+}
+
+MapsController.prototype.getDistance = function(p1, p2){
+    var R = 6371; // earth's mean radius in km
+    var dLat  = rad(p2.lat() - p1.lat());
+    var dLong = rad(p2.lng() - p1.lng());
+
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+	    Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) * Math.sin(dLong/2) * Math.sin(dLong/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c;
+    
+    return d.toFixed(3);
 }
