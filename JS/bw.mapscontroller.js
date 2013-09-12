@@ -16,7 +16,7 @@ function MapsController(){
     this.nbEssai = 1;
 }
 
-MapsController.prototype.initialyze = function () {
+MapsController.prototype.initialyze = function (friends) {
     if ($('#position').attr('data-lat') != "") {
 	this.coordonnees.lat = $('#position').attr('data-lat');
 	this.coordonnees.lng = $('#position').attr('data-lng');
@@ -25,14 +25,17 @@ MapsController.prototype.initialyze = function () {
     }
     // On créée la map
     this.map = new google.maps.Map(document.getElementById("map-canvas"), this.mapOptions);
-    $this = this;
+    var $this = this;
     // On ajoute le listener pour la pose de marqueur au click
     google.maps.event.addListener(this.map, 'click', function (event) {
 	$this.putMarker(event);
     });
+    
+    $this.createMarkerFriends(friends);
 }
 
 MapsController.prototype.getGeolocalisation = function(){
+    var $this = this;
     // Si le navigateur possède la géoloc on récupère sa position. Sinon on prends Paris par défaut
     if(navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition(function(position) {
@@ -40,6 +43,10 @@ MapsController.prototype.getGeolocalisation = function(){
 	    $('#position').attr('data-lat', position.coords.latitude);
 	    $('#position').attr('data-lng', position.coords.longitude);
 	    $('#position').attr('data-alt', position.coords.altitude);
+	    
+	    $this.coordonnees.lat = position.coords.latitude;
+	    $this.coordonnees.lng = position.coords.longitude;
+	    $this.coordonnees.alt = position.coords.altitude;
 	});
     }
     return this.coordonnees;
@@ -58,4 +65,8 @@ MapsController.prototype.putMarker = function (event) {
 	icon: this.markerImageNow
     });
     this.map.panTo(event.latLng);
+}
+
+MapsController.prototype.createMarkerFriends = function (friends) {
+    console.log(friends)
 }
