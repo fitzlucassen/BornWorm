@@ -29,15 +29,22 @@ $(document).ready(function () {
     });
     
     $('#layout').on('click', '#nextFriend', function(){
-	// On cache la div
-	$('#result').fadeOut('slow');
-	$('#friend').fadeOut('slow');
-	
-	$('#friendName').html(Facebook.response[cptFriends].name);
-	$('#friend').fadeIn('slow');
-	// On initialise la maps avec le premier ami de la liste
-	initializeMaps(Facebook.response[cptFriends]);
-	cptFriends++;
+        if(Facebook.response.length == cptFriends){
+            $('#result').fadeOut('slow');
+            $('#friend').fadeOut('slow');
+            $('#gameOver').fadeIn('slow');
+        }
+        else{
+            // On cache la div
+            $('#result').fadeOut('slow');
+            $('#friend').fadeOut('slow');
+
+            $('#friendName').html(Facebook.response[cptFriends].name);
+            $('#friend').fadeIn('slow');
+            // On initialise la maps avec le premier ami de la liste
+            initializeMaps(Facebook.response[cptFriends]);
+            cptFriends++;
+        }  
     });
 });
 	
