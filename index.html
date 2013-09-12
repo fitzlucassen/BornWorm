@@ -35,7 +35,7 @@
 
 	<!-- CSS -->
 	<link type="text/css" rel="stylesheet" href="CSS/Base/reset.css" />
-	<link type="text/css" rel="stylesheet" href="CSS/Base/bw.base.css" />
+	<link type="text/css" rel="stylesheet" href="CSS/bw.mapsGame.css" />
 	<!-- END CSS -->
 
 	<!-- SCRIPTS -->
@@ -44,7 +44,10 @@
 	<script type="text/javascript" src="JS/Base/bw.helper.js"></script>
 
 	<script type="text/javascript" src="JS/bw.facebookcontroller.js"></script>
-	<script type="text/javascript" src="JS/Base/bw.base.js"></script>
+	<script type="text/javascript" src="JS/bw.mapscontroller.js"></script>
+	<script type="text/javascript" src="JS/bw.mapsGame.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR6MQEKvMFKiYTS0uZZTA-YIKe2yRcfng&sensor=false"></script>
+
 	<!--[if lt IE 9]>
 		<script src="JS/Base/html5shiv.js"></script>
 	<![endif]-->
@@ -56,7 +59,9 @@
 	    </header>
 
 	    <div id="layout">
-		
+		<div id="map-canvas">
+		</div>
+		<div id="position" data-lat="" data-lng="" data-alt=""></div>
 	    </div>
 
 	    <footer>
