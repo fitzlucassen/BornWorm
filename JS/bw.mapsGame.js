@@ -1,11 +1,13 @@
 var Maps = {};
 var Facebook = {};
+var View = {}
 var cptFriends = 0;
 
 $(document).ready(function () {
     // Initialisation des controllers
     Maps = new MapsController();
     Facebook = new FacebookController();
+    View = new MainView();
     
     // Facebook connect + demande utilisateur
     setTimeout(function(){
@@ -16,35 +18,28 @@ $(document).ready(function () {
     // Validation du nombre d'ami -->
     $('#layout').on('click', '.nbFriends', function(){
 	// On cache la div
-	$('#explanation').fadeOut('slow');
+	$('#explanation').css({display: 'none'});
 	
 	// On récupère le nombre d'ami choisi en random
         Facebook.takeXFriends(Facebook.response, $(this).val());
 	
-	$('#friendName').html(Facebook.response[cptFriends].name);
-	$('#friend').fadeIn('slow');
+	View.appendNewName(Facebook.response[cptFriends].name);
+	
 	// On initialise la maps avec le premier ami de la liste
 	initializeMaps(Facebook.response[cptFriends]);
 	cptFriends++;
     });
     
     $('#layout').on('click', '#nextFriend', function(){
-        if(Facebook.response.length == cptFriends){
-            $('#result').fadeOut('slow');
-            $('#friend').fadeOut('slow');
-            $('#gameOver').fadeIn('slow');
-        }
-        else{
-            // On cache la div
-            $('#result').fadeOut('slow');
-            $('#friend').fadeOut('slow');
-
-            $('#friendName').html(Facebook.response[cptFriends].name);
-            $('#friend').fadeIn('slow');
-            // On initialise la maps avec le premier ami de la liste
-            initializeMaps(Facebook.response[cptFriends]);
-            cptFriends++;
-        }  
+	// On cache les div
+	$('#result').css({display: 'none'});
+	$('#friend').css({display: 'none'});
+	
+	View.appendNewName(Facebook.response[cptFriends].name);
+	
+	// On initialise la maps avec le premier ami de la liste
+	initializeMaps(Facebook.response[cptFriends]);
+	cptFriends++;
     });
 });
 	
@@ -56,4 +51,7 @@ function initializeMaps(friend) {
 	Maps.initialyze(friend);
     }, 1000);
 }
-var rad = function(x) {return x*Math.PI/180;}
+
+function rad(x) {
+    return x * Math.PI / 180;
+}

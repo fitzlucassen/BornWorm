@@ -3,7 +3,7 @@ function MapsController(){
 	lat: 48.856614,
 	lng: 2.3522219000000177,
 	alt: 0,
-	zoom: 12
+	zoom: 6
     };
     this.mapOptions = {
 	center: new google.maps.LatLng(this.coordonnees.lat, this.coordonnees.lng),
@@ -85,8 +85,7 @@ MapsController.prototype.putMarker = function (event) {
 		title: 'Facebook.response[cpt].name',
 		icon: $this.markerImageBorn
 	    });
-	    $('#distance').html($this.getDistance(event.latLng, marker.position));
-	    $('#result').fadeIn('slow');
+	    View.appendResult($this.getDistance(event.latLng, marker.position));
 	}
     });
 }
@@ -102,7 +101,7 @@ MapsController.prototype.createMarkerFriend = function (friend) {
 
     var myGeocoder = new google.maps.Geocoder();
     myGeocoder.geocode(GeocoderOptions, function(results, status){
-	// Si la recher à fonctionné
+	// Si la recherche à fonctionné
 	if(status == google.maps.GeocoderStatus.OK) {
 	    // Création du Marker
 	    var myMarker = new google.maps.Marker({
