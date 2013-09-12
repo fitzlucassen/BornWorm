@@ -68,5 +68,31 @@ MapsController.prototype.putMarker = function (event) {
 }
 
 MapsController.prototype.createMarkerFriends = function (friends) {
-    console.log(friends)
+    var $this = this;
+    var cpt = 0;
+    for(cpt = 0; cpt < friends.length; cpt++){
+	var adresse = friends[cpt].hometown.name;
+	
+	var GeocoderOptions = {
+	    'address' : adresse.split(',').first().trim(),
+	    'region' : adresse.split(',').last().trim()
+	}
+	
+	var myGeocoder = new google.maps.Geocoder();
+	myGeocoder.geocode(GeocoderOptions, function(results, status){
+	    // Si la recher à fonctionné
+	    if(status == google.maps.GeocoderStatus.OK) {
+		// S'il existait déjà un marker sur la map,
+		// on l'enlève
+		// Création du Marker
+		var myMarker = new google.maps.Marker({
+		    // Coordonnées
+		    position: results[0].geometry.location,
+		    map: this.map,
+		    title: title,
+		    icon: $this.markerImageBorn
+		});
+	    }
+	});
+    }
 }
