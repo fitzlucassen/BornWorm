@@ -10,8 +10,8 @@ $(document).ready(function () {
 	$('#explanation').fadeIn('slow');
     },1000);
     
-    $('.nbFriends').live('click', function(){
-	
+    $('#layout').on('click', '.nbFriends', function(){
+	initializeMaps();
     });
 });
 	
@@ -20,6 +20,6 @@ function initializeMaps(friends) {
 	
     // Récupérer la position peut prendre un peu de temps. D'où un délai de 1s avant la suite
     setTimeout(function () {
-	Maps.initialyze();
+	Maps.initialyze(friends);
     }, 1000);
 }

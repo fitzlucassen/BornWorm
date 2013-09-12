@@ -11,3 +11,6 @@ header{
 #layout{
 	min-height: 600px;
 }
+#explanation{
+    display: none;
+}
