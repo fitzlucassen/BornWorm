@@ -8,6 +8,8 @@ MainView.prototype.appendResult = function(result){
 }
 
 MainView.prototype.appendNewName = function(name){
+    
     $('#friendName').html(name);
     $('#friend').fadeIn('slow');
+ 
 }

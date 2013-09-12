@@ -34,9 +34,14 @@ $(document).ready(function () {
 	// On cache les div
 	$('#result').css({display: 'none'});
 	$('#friend').css({display: 'none'});
-	
-	View.appendNewName(Facebook.response[cptFriends].name);
-	
+	if(Facebook.response.length == cptFriends){
+            $('#result').fadeOut('slow');
+            $('#friend').fadeOut('slow');
+            $('#gameOver').fadeIn('slow');
+        }
+        else{
+            View.appendNewName(Facebook.response[cptFriends].name);
+        }
 	// On initialise la maps avec le premier ami de la liste
 	initializeMaps(Facebook.response[cptFriends]);
 	cptFriends++;
