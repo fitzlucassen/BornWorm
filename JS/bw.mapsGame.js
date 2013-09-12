@@ -11,7 +11,7 @@ $(document).ready(function () {
     },1000);
     
     $('#layout').on('click', '.nbFriends', function(){
-	initializeMaps();
+	initializeMaps(Facebook.response);
     });
 });
 	
