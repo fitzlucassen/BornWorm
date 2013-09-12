@@ -1,23 +1,33 @@
 function MapsController(){
+    // Coordonnées par défaut sans géo loc (paris dezoomé)
     this.coordonnees = {
 	lat: 48.856614,
 	lng: 2.3522219000000177,
 	alt: 0,
 	zoom: 6
     };
+    
+    // Option de la map
     this.mapOptions = {
 	center: new google.maps.LatLng(this.coordonnees.lat, this.coordonnees.lng),
 	zoom: this.coordonnees.zoom,
 	mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+    
+    // Deux type de marker différent pour différencier ville naissance/ville actuelle
     this.markerImageBorn = new google.maps.MarkerImage('Images/maps-marker-bleu.png');
     this.markerImageNow = new google.maps.MarkerImage('Images/maps-marker-rose.png');
+    
+    // Marker de la vrai ville de naissance
     this.currentMarker = {};
+    // Map
     this.map = {};
+    // Pour futur gestion du nombre d'essai
     this.nbEssai = 1;
 }
 
 MapsController.prototype.initialyze = function (friend) {
+    // Si la position geoloc a été récupéré on la set dans les propriété de l'objet
     if ($('#position').attr('data-lat') != "") {
 	this.coordonnees.lat = $('#position').attr('data-lat');
 	this.coordonnees.lng = $('#position').attr('data-lng');
@@ -32,6 +42,7 @@ MapsController.prototype.initialyze = function (friend) {
 	$this.putMarker(event);
     });
     
+    // Et on pose le marker sur la ville actuelle de l'ami tiré au sort
     $this.createMarkerFriend(friend);
 }
 
@@ -82,7 +93,7 @@ MapsController.prototype.putMarker = function (event) {
 		// Coordonnées
 		position: results[0].geometry.location,
 		map: $this.map,
-		title: 'Facebook.response[cpt].name',
+		title: 'The title',
 		icon: $this.markerImageBorn
 	    });
 	    View.appendResult($this.getDistance(event.latLng, marker.position));
@@ -93,7 +104,8 @@ MapsController.prototype.putMarker = function (event) {
 MapsController.prototype.createMarkerFriend = function (friend) {
     var $this = this;
     var adresse = friend.location;
-
+    
+    // Création du geocoder pour récupérer lat et lng via nom de ville
     var GeocoderOptions = {
 	'address' : adresse.split(',').first().trim(),
 	'region' : adresse.split(',').last().trim()
@@ -108,7 +120,7 @@ MapsController.prototype.createMarkerFriend = function (friend) {
 		// Coordonnées
 		position: results[0].geometry.location,
 		map: $this.map,
-		title: 'Facebook.response[cpt].name',
+		title: 'The title',
 		icon: $this.markerImageBorn
 	    });
 	}
@@ -116,7 +128,7 @@ MapsController.prototype.createMarkerFriend = function (friend) {
 }
 
 MapsController.prototype.getDistance = function(p1, p2){
-    var R = 6371; // earth's mean radius in km
+    var R = 6371; // rayon en km de la terre
     var dLat  = rad(p2.lat() - p1.lat());
     var dLong = rad(p2.lng() - p1.lng());
 
