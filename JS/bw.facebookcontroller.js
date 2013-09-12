@@ -4,6 +4,8 @@ function FacebookController() {
 
 FacebookController.prototype.getFriends = function() {
     var $this = this;
+    
+    // Récupération d'info d'ami
     FB.api('/me/friends', {fields: 'name,id,location,birthday,hometown'}, function (response) {
 	var friendsToFind = [];
         var data = response.data;
@@ -18,6 +20,8 @@ FacebookController.prototype.getFriends = function() {
 
 FacebookController.prototype.connect = function() {
     var $this = this;
+    
+    // Connecte à facebook + auth + récupération d'info ami
     FB.login(function(response) {
 	if (response.authResponse) {
 	    var access_token = FB.getAuthResponse()['accessToken'];
@@ -32,12 +36,15 @@ FacebookController.prototype.connect = function() {
 }
 
 FacebookController.prototype.hasHometownAndLocation = function(friend) {
+    // retourne vrai si l'ami a la ville de naissance et la ville de résidence
+    // retourne faux sinon
     if(friend.hometown == null || friend.location == null)
         return false;
     return true;
 }
 
 FacebookController.prototype.takeXFriends = function(friends, limit) {
+    // récupère un nombre limiter d'amis
     var limitFriends = limit;
     var arrayFriend = new Array();
     arrayFriend = friends;
