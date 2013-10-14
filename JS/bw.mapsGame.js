@@ -1,25 +1,31 @@
 var Maps = {};
 var Facebook = {};
-var View = {}
+var View = {};
+var Game = {};
 var cptFriends = 0;
+var logged = false;
 
 $(document).ready(function () {
     // Initialisation des controllers
     Maps = new MapsController();
     Facebook = new FacebookController();
+    Game = new GameController();
     View = new MainView();
     
-    // Facebook connect + demande utilisateur
-    setTimeout(function(){
-	Facebook.connect();
-	$('#explanation').fadeIn('slow');
-    },1000);
+    $('.button-facebook > span').click(function(){
+	// Facebook connect + demande utilisateur
+	if(!logged){
+	    Facebook.connect();
+	    View.refreshAfterConnect();
+	}
+    });
     
     // Validation du nombre d'ami -->
     $('#layout').on('click', '.nbFriends', function(){
 	// On cache la div
-	$('#explanation').css({display: 'none'});
+	View.startGame();
 	
+	Game.setEchelle($(this).val());
 	// On récupère le nombre d'ami choisi en random
         Facebook.takeXFriends(Facebook.response, $(this).val());
 	
@@ -32,12 +38,13 @@ $(document).ready(function () {
     
     $('#layout').on('click', '#nextFriend', function(){
 	// On cache les div
-	$('#result').css({display: 'none'});
-	$('#friend').css({display: 'none'});
+	View.nextFriend();
+	
 	if(Facebook.response.length == cptFriends){
             $('#result').fadeOut('slow');
             $('#friend').fadeOut('slow');
             $('#gameOver').fadeIn('slow');
+	    View.appendShare(Game.getScore());
         }
         else{
             View.appendNewName(Facebook.response[cptFriends].name);

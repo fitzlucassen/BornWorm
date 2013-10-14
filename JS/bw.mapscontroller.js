@@ -96,7 +96,10 @@ MapsController.prototype.putMarker = function (event) {
 		title: 'The title',
 		icon: $this.markerImageBorn
 	    });
-	    View.appendResult($this.getDistance(event.latLng, marker.position));
+	    var score = $this.getDistance(event.latLng, marker.position);
+	    View.appendResult(score);
+	    Game.calculatScore(score);
+	    View.appendScore(Game.getScore());
 	}
     });
 }

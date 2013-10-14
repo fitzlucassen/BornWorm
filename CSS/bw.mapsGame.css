@@ -1,48 +1,187 @@
 #global{
-	width: 1024px;
-	height: auto;
-	margin: auto;
+    height: 100%;
+    margin: auto;
+    background: #eee url(../Images/maps-wallpaper.jpg) center center no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 header{
-	background: black;
-	border-bottom: 1px solid #444;
-	height: 50px;
-        color: #FFFFFF;
-        text-align: center;
-        font-size: 26px;
-        font-family: monospace;
-        padding-top: 20px;
+    background: rgba(199,210,199, 0.8);
+    border-bottom: 1px solid #111;
+    height: 50px;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 26px;
+    font-family: Georgia;
+    padding-top: 20px;
+    text-shadow: 1px 1px 1px rgba(247,249,248,0.6);
 }
 #layout{
-	min-height: 600px;
 }
-#explanation, #result, #friend,#gameOver{
+#result, #friend,#gameOver,#score{
     display: none;
 }
 #explanation{
-    width: 500px;
-    height: 350px;
     margin: auto;
     text-align: center;
-    font-size: 19px;
-    padding-top: 100px;
+    font-size: 18px;
+    margin-top: 250px;
+    font-family: monospace;
+    line-height: 24px;
+    background: rgba(199,210,199, 0.8);
+    padding: 20px 0;
+    color: #027c77;
 }
 
 #explanation .questionStart{
     font-weight: bold;
 }
-
+#explanation input{
+    margin-right: 10px;
+}
 #friend span#friendName{
     font-weight: bold;
     font-size: 20px;
 }
 
-#friend, #result, #gameOver{
+#friend, #result, #gameOver, #score{
     width: 500px;
-    margin: 5px auto;
+    margin: 50px auto 0 auto;
     text-align: center;
+    background: #cc5c03;
+    padding: 5px;
+    color: white;
+    font-family: georgia;
+    text-shadow: 1px 1px 1px rgba(140,140,140,0.6);
+    opacity: 0.9;
+
+    
+    border-top-left-radius: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -moz-border-top-left-radius: 10px;
+    -o-border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-top-right-radius: 10px;
+    -o-border-top-right-radius: 10px;
 }
 
 #result{
-    color: green;
+    color: #249e99;
+    font-family: georgia;
+    margin: 0 auto;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -o-border-radius: 0px;
+}
+#result input{
+    margin: 5px auto;
+    padding: 5px;
+    
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 3px rgba(140,140,140,0.8);
+    -webkit-box-shadow: 2px 2px 3px rgba(140,140,140,0.8);
+    -moz-box-shadow: 2px 2px 3px rgba(140,140,140,0.8);
+    -o-box-shadow: 2px 2px 3px rgba(140,140,140,0.8);
+
+
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+#result input:hover{
+    box-shadow: inset 2px 2px 3px rgba(140,140,140,0.8);
+    -webkit-box-shadow: inset 2px 2px 3px rgba(140,140,140,0.8);
+    -moz-box-shadow: inset 2px 2px 3px rgba(140,140,140,0.8);
+    -o-box-shadow: inset 2px 2px 3px rgba(140,140,140,0.8);
+    border: 0;
+    padding: 6px;
+}
+#score{
+    margin: 0 auto;
+    
+    border-bottom-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-bottom-left-radius: 10px;
+    -o-border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -moz-border-bottom-right-radius: 10px;
+    -o-border-bottom-right-radius: 10px;
+    border-top-left-radius: 0;
+    -webkit-border-top-left-radius: 0;
+    -moz-border-top-left-radius: 0;
+    -o-border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    -webkit-border-top-right-radius: 0;
+    -moz-border-top-right-radius: 0;
+    -o-border-top-right-radius: 0;
+}
+#score a{
+    text-decoration: underline;
+    color: #fff;
+}
+/* FB BUTTON */
+.connexion-dmd .facebook {
+    text-align: center;
+    padding-top: 30px;
+}
+div.facebook > span.min-margin {
+    margin: 10px auto;
+}
+.button-facebook:hover {
+    background-image: url(../Images/facebook-left-hover.png);
+}
+.button-facebook {
+    background-image: url(../Images/facebook-left.png);
+    padding: 0px 0px 0px 43px;
+}
+.button {
+    background-position: left center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin: 20px auto;
+}
+.button-facebook > span:hover {
+    background-image: url(../Images/facebook-right-hover.png);
+}
+.button-facebook > span {
+    background-image: url(../Images/facebook-right.png);
+}
+.button > span {
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding: 0 5px 0 0;
+    display: inline-block;
+}
+.connexion-dmd .facebook span a {
+    font-family: 'Lobster', 'Verdana';
+    font-size: 17px;
+    width: 129px;
+    padding: 9px 10px;
+    line-height: 17px;
+    height: 35px;
+}
+.button-facebook > span > a:hover, .button-facebook > span > button:hover, .button-facebook > span > input[type="submit"]:hover {
+    background-image: url(../Images/facebook-back-hover.png);
+}
+.button-facebook > span > a, .button-facebook > span > button, .button-facebook > span > input[type="submit"] {
+    background-image: url(../Images/facebook-back.png);
+}
+.button > span > a, .button > span > button, .button > span > input[type="submit"], .button > span > input[type="button"] {
+    color: #FFFFFF;
+    font-family: 'Lobster', Verdana;
+    text-decoration: none;
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+    background-position: center center;
+    background-repeat: repeat-x;
+    padding: 8px 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
 }

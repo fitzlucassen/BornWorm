@@ -53,7 +53,3 @@ FacebookController.prototype.takeXFriends = function(friends, limit) {
         arrayFriend.splice(unluckyFriendIndex, 1);
     }while(friends.length > limitFriends)
 }
-
-FacebookController.prototype.share = function() {
-
-}
