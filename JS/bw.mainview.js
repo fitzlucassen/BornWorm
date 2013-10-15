@@ -7,8 +7,12 @@ MainView.prototype.appendResult = function(result){
     $('#result').fadeIn('slow');
 }
 
-MainView.prototype.appendNewName = function(name){
+MainView.prototype.appendNewName = function(name, picture){
     $('#friendName').html(name);
+    $('#friendName + img').attr('src', picture);
+    $('#friendName + img').attr('alt', 'Photo de ' + name);
+
+
     $('#friend').fadeIn('slow');
     $('#score').fadeIn('slow');
 }
@@ -33,5 +37,13 @@ MainView.prototype.appendShare = function(score){
     m.setAttribute('content', 'J\'ai fait ' + score + ' points à Bornworm. Peux-tu faire mieux ?');
     document.getElementsByTagName('head')[0].appendChild(m);
     
-    $('#score').html('<a href="#" onclick="window.open(\'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href) + '\', \'facebook-share-dialog\', \'width=626,height=436\');return false;">Partagez votre score sur Facebook</a>');
+    $('#score').append('<br/><p><a href="#" onclick="window.open(\'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href) + '\', \'facebook-share-dialog\', \'width=626,height=436\');return false;">Partagez votre score sur Facebook</a></p>');
+    $('#score').append('<br/><div id="invitation-module"></div>');
+}
+MainView.prototype.limitAccess = function(){
+    $('.questionStart').html('Vous devez aimer la page "Bornworm" pour pouvoir jouer. Ensuite, rafraichissez la page.');
+    $('.nbFriends, .nbFriends + label').css({display:'none'});
+}
+MainView.prototype.appendRequest = function(){
+    $('#invitation-module').html('<p><a href="#" onclick="window.open(\'https://www.facebook.com/dialog/apprequests?app_id=426080854175488&message=' + encodeURIComponent('Viens me défier à Bornworm !') + '!&redirect_uri=http://bornworm.passanger.fr/\', \'facebook-requst-dialog\', \'width=1000,height=436\');return false;">Et invitez vos amis à vous défier.</a></p>');
 }

@@ -47,7 +47,6 @@ MapsController.prototype.initialyze = function (friend) {
 }
 
 MapsController.prototype.getGeolocalisation = function(){
-    var $this = this;
     // Si le navigateur possède la géoloc on récupère sa position. Sinon on prends Paris par défaut
     if(navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition(function(position) {
@@ -55,13 +54,8 @@ MapsController.prototype.getGeolocalisation = function(){
 	    $('#position').attr('data-lat', position.coords.latitude);
 	    $('#position').attr('data-lng', position.coords.longitude);
 	    $('#position').attr('data-alt', position.coords.altitude);
-	    
-	    $this.coordonnees.lat = position.coords.latitude;
-	    $this.coordonnees.lng = position.coords.longitude;
-	    $this.coordonnees.alt = position.coords.altitude;
 	});
     }
-    return this.coordonnees;
 }
 
 MapsController.prototype.putMarker = function (event) {

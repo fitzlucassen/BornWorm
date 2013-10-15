@@ -1,5 +1,6 @@
 function FacebookController() {
     this.response = {};
+    this.friends = {};
 }
 
 FacebookController.prototype.getFriends = function() {
@@ -11,7 +12,7 @@ FacebookController.prototype.getFriends = function() {
         var data = response.data;
         for (var i = 0; i < data.length; i++) {
             if($this.hasHometownAndLocation(data[i])){
-                friendsToFind.push({name: data[i].name, hometown: data[i].hometown.name, location: data[i].location.name});
+                friendsToFind.push({id: data[i].id, name: data[i].name, hometown: data[i].hometown.name, location: data[i].location.name});
             }
         }
         $this.response = friendsToFind;
@@ -24,9 +25,7 @@ FacebookController.prototype.connect = function() {
     // Connecte à facebook + auth + récupération d'info ami
     FB.login(function(response) {
 	if (response.authResponse) {
-	    var access_token = FB.getAuthResponse()['accessToken'];
-	    console.log('Access Token = '+ access_token);
-	    
+	    var access_token = FB.getAuthResponse()['accessToken'];	    
 	    $this.getFriends()
 	}
 	else {
@@ -52,4 +51,19 @@ FacebookController.prototype.takeXFriends = function(friends, limit) {
         var unluckyFriendIndex = Math.random() * (friends.length - 0) + 0;
         arrayFriend.splice(unluckyFriendIndex, 1);
     }while(friends.length > limitFriends)
+}
+FacebookController.prototype.limitGameIfNoLike = function(){
+    FB.api('/me/likes', function(response) {
+	var cpt = 0;
+	var like = false;
+	
+	for(cpt = 0; cpt < response.data.length; cpt++){
+	    like = response.data[cpt].id == 170291819840947
+	    if(like)
+		break;
+	}
+	if(!like){
+	    View.limitAccess();
+	}
+    });
 }

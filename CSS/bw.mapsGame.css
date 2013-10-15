@@ -16,9 +16,7 @@ header{
     padding-top: 20px;
     text-shadow: 1px 1px 1px rgba(247,249,248,0.6);
 }
-#layout{
-}
-#result, #friend,#gameOver,#score{
+#result, #friend, #gameOver, #score, #error-view{
     display: none;
 }
 #explanation{
@@ -32,7 +30,6 @@ header{
     padding: 20px 0;
     color: #027c77;
 }
-
 #explanation .questionStart{
     font-weight: bold;
 }
@@ -42,8 +39,12 @@ header{
 #friend span#friendName{
     font-weight: bold;
     font-size: 20px;
+    vertical-align: middle
 }
-
+#friend img{
+    vertical-align: middle;
+    margin-left: 10px;
+}
 #friend, #result, #gameOver, #score{
     width: 500px;
     margin: 50px auto 0 auto;
@@ -123,6 +124,21 @@ header{
     text-decoration: underline;
     color: #fff;
 }
+
+
+
+/* ERROR GESTION */
+#error-view{
+    background: rgb(145,40,47);
+    color: rgb(255,20,20);
+    font-family: monospace;
+    font-size: 12px;
+    text-align: center;
+}
+/* END ERROR GESTION */
+
+
+
 /* FB BUTTON */
 .connexion-dmd .facebook {
     text-align: center;
@@ -185,3 +201,4 @@ div.facebook > span.min-margin {
     text-align: center;
     cursor: pointer;
 }
+/* END FB BUTTON */
