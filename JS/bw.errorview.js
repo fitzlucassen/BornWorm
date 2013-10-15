@@ -3,7 +3,7 @@ function ErrorView() {
 }
 
 ErrorView.prototype.appendIfNoGeoloc = function(){
-    if ($('#position').attr('data-lat') != "") {
+    if ($('#position').attr('data-lat') == "") {
 	this.divError.append('<p>- Il est impossible de récupérer votre position géographique, veuillez accepter la géolocalisation. Paris sera prit par défaut.</p>');
     }
     this.divError.fadeIn('slow');
@@ -17,6 +17,7 @@ ErrorView.prototype.appendIfNoData = function(){
 	html += '<li>Vous avez accepté les pop-up sur votre navigateur</li>';
 	html += '<li>Vous avez autorisé l\'application à accéder à vos informations</li>';
 	html += '</ul>';
+	this.divError.append(html);
     }
     this.divError.fadeIn('slow');
 }

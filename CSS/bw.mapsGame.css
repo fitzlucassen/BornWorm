@@ -129,11 +129,12 @@ header{
 
 /* ERROR GESTION */
 #error-view{
-    background: rgb(145,40,47);
-    color: rgb(255,20,20);
+    background: rgb(145,116,119);
+    color: rgb(255,0,0);
     font-family: monospace;
     font-size: 12px;
     text-align: center;
+    padding: 10px;
 }
 /* END ERROR GESTION */
 
