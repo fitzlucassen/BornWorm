@@ -65,7 +65,11 @@
 		    appId      : '426080854175488',               // App ID from the app dashboard
 		    channelUrl : '//local.meme42.fr/channel.html', // Channel file for x-domain comms
 		    status     : true,                            // Check Facebook Login status
+		    cookie     : true,
 		    xfbml      : true                             // Look for social plugins on the page
+		});
+		FB.Event.subscribe('edge.create', function(response) {
+		    window.location.reload();
 		});
 	    };
 
