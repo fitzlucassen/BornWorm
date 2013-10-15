@@ -19,6 +19,7 @@ MainView.prototype.appendNewName = function(name, picture){
 MainView.prototype.refreshAfterConnect = function(){
     $('.facebook').css({display:'none'});
     $('#explanationPresentation').fadeIn('slow');
+    $('#explanationPresentation input').attr('disabled', true);
 }
 MainView.prototype.startGame = function(){
     $('#explanation').css({display: 'none'});

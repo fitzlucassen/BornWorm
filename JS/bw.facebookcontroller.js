@@ -31,7 +31,7 @@ FacebookController.prototype.connect = function() {
 	else {
 	    console.log('User cancelled login or did not fully authorize.');
 	}
-    },{scope: 'friends_location, friends_hometown'});
+    },{scope: 'friends_location, friends_hometown, user_likes'});
     FB.Event.subscribe('edge.create', function(response) {
 	$(location).attr('href', $(location).attr('href'));
     });
@@ -67,6 +67,9 @@ FacebookController.prototype.limitGameIfNoLike = function(){
 	}
 	if(!like){
 	    View.limitAccess();
+	}
+	else{
+	    $('#explanationPresentation input').attr('disabled', false);
 	}
     });
 }
