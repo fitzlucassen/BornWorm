@@ -2,7 +2,7 @@ var Maps = {};
 var Facebook = {};
 var View = {};
 var Game = {};
-var Error = {};
+var ErrorGame = {};
 
 var cptFriends = 0;
 var logged = false;
@@ -13,7 +13,7 @@ $(document).ready(function () {
     Facebook = new FacebookController();
     Game = new GameController();
     View = new MainView();
-    Error = new ErrorView();
+    ErrorGame = new ErrorView();
     
     // Get geolocalisation
     Maps.getGeolocalisation();
@@ -22,12 +22,11 @@ $(document).ready(function () {
 	// Facebook connect + demande utilisateur
 	if(!logged){
 	    Facebook.connect();
-	    Error.appendIfNoGeoloc();
+	    ErrorGame.appendIfNoGeoloc();
 
-	    
 	    setTimeout(function(){
-		Error.appendIfNoData();
-		Error.disableIfNoFriendsEnough();
+		ErrorGame.appendIfNoData();
+		ErrorGame.disableIfNoFriendsEnough();
 		
 		// On limite l'accès au jeu si pas de like
 		Facebook.limitGameIfNoLike();
