@@ -135,6 +135,21 @@ header{
     font-size: 12px;
     text-align: center;
     padding: 10px;
+    position: relative;
+}
+#close-error{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    padding-top: 5px;
+    cursor: pointer;
+}
+#close-error:hover{
+    background: rgb(125,96,99);
 }
 /* END ERROR GESTION */
 

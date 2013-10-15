@@ -74,6 +74,10 @@ $(document).ready(function () {
 	initializeMaps(Facebook.response[cptFriends]);
 	cptFriends++;
     });
+    
+    $('#close-error').click(function(){
+	$('#error-view').fadeOut('slow');
+    });
 });
 	
 function initializeMaps(friend) {	
