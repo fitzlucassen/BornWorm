@@ -9,9 +9,41 @@ GameController.prototype.setEchelle = function(echelle){
 	this.echelle = echelle;
 }
 GameController.prototype.calculatScore = function(distance){
-    this.distance += Math.round(distance,2);
+    this.distance += Math.round(distance);
     this.currentScore += Math.round(this.maxScore * this.echelle / this.distance);
 }
 GameController.prototype.getScore = function(){
     return this.currentScore;
+}
+GameController.prototype.saveScore = function(score){
+    var json = {
+	id: Facebook.me.id,
+	name: Facebook.me.name,
+	score: score,
+	toSave: true
+    };
+    $.ajax({
+	type: "POST",
+	url: 'Script/bw.utilities.php',
+	data: json,
+	success: function(data){},
+	dataType: json
+    });
+}
+GameController.prototype.getClassement = function(){
+    var json = {
+	id: Facebook.me.id,
+	name: Facebook.me.name,
+	score: 0,
+	toSave: false
+    };
+    $.ajax({
+	type: "POST",
+	url: 'Script/bw.utilities.php',
+	data: json,
+	success: function(data){
+	    console.log(data);
+	},
+	dataType: json
+    });
 }

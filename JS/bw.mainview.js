@@ -47,4 +47,5 @@ MainView.prototype.limitAccess = function(){
 }
 MainView.prototype.appendRequest = function(){
     $('#invitation-module').html('<p><a href="#" onclick="window.open(\'https://www.facebook.com/dialog/apprequests?app_id=426080854175488&message=' + encodeURIComponent('Viens me défier à Bornworm !') + '!&redirect_uri=http://bornworm.passanger.fr/\', \'facebook-requst-dialog\', \'width=1000,height=436\');return false;">Et invitez vos amis à vous défier.</a></p>');
+    $('#invitation-module').append('<br/><p><a href="#" onclick="window.location.reload();">Rejouer</a></p>');
 }

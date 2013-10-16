@@ -136,7 +136,7 @@ header{
     text-align: center;
     padding: 10px;
     position: relative;
-    min-height: 30px;
+    min-height: 15px;
 }
 #close-error{
     position: absolute;

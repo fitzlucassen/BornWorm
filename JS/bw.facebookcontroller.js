@@ -1,6 +1,7 @@
 function FacebookController() {
     this.response = {};
     this.friends = {};
+    this.me = {};
 }
 
 FacebookController.prototype.getFriends = function() {
@@ -26,7 +27,8 @@ FacebookController.prototype.connect = function() {
     FB.login(function(response) {
 	if (response.authResponse) {
 	    var access_token = FB.getAuthResponse()['accessToken'];	    
-	    $this.getFriends()
+	    $this.getFriends();
+	    $this.getMe();
 	}
 	else {
 	    console.log('User cancelled login or did not fully authorize.');
@@ -68,5 +70,11 @@ FacebookController.prototype.limitGameIfNoLike = function(){
 	else{
 	    $('#explanationPresentation input').attr('disabled', false);
 	}
+    });
+}
+FacebookController.prototype.getMe = function(){
+    var $this = this;
+    FB.api('/me', {fields: 'name,id'}, function(response) {
+	$this.me = response;
     });
 }
