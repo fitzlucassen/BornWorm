@@ -71,6 +71,9 @@
 		FB.Event.subscribe('edge.create', function(response) {
 		    window.location.reload();
 		});
+		FB.Event.subscribre('auth.login', function(response){
+		    window.location.reload();
+		})
 	    };
 
 	    // Load the SDK asynchronously

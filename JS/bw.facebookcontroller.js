@@ -29,6 +29,7 @@ FacebookController.prototype.connect = function() {
 	    var access_token = FB.getAuthResponse()['accessToken'];	    
 	    $this.getFriends();
 	    $this.getMe();
+	    start();
 	}
 	else {
 	    console.log('User cancelled login or did not fully authorize.');

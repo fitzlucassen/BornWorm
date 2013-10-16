@@ -19,8 +19,8 @@ function MapsController(){
     this.markerImageNow = new google.maps.MarkerImage('Images/maps-marker-rose.png');
     
     // Marker de la vrai ville de naissance
-    this.currentMarker = {};
-    this.currentMarkerLocation = {};
+    this.currentMarkers = [];
+    this.currentMarkerLocation = [];
     // Map
     this.map = {};
     // Pour futur gestion du nombre d'essai
@@ -49,7 +49,15 @@ MapsController.prototype.initialyze = function (friend) {
     }
 }
 MapsController.prototype.cleanMarkers = function(friend){
-    this.map.clearMarkers();
+    var cpt = 0;
+    for(cpt = 0; cpt < this.currentMarkerLocation.length; cpt++){
+	this.currentMarkerLocation[cpt].setMap(null);
+    }
+    this.currentMarkerLocation = [];
+    for(cpt = 0; cpt < this.currentMarkers.length; cpt++){
+	this.currentMarkers[cpt].setMap(null);
+    }
+    this.currentMarkers = [];
     // On pose le marker sur la ville actuelle de l'ami tiré au sort
     this.createMarkerFriend(friend);
 }
@@ -68,7 +76,6 @@ MapsController.prototype.getGeolocalisation = function(){
 
 MapsController.prototype.putMarker = function (event) {
     // Pour title du marqueur d'essai
-    var $this = this;
     var title = "Essai numéro " + this.nbEssai;
     this.nbEssai++;
     
@@ -80,7 +87,9 @@ MapsController.prototype.putMarker = function (event) {
 	title: title,
 	icon: this.markerImageNow
     });
+    this.currentMarkers.push(myMarker);
     
+    var $this = this;
     // Création du Marker réel de naissance
     var GeocoderOptions = {
 	'address' : Facebook.response[cptFriends-1].hometown,
@@ -98,6 +107,8 @@ MapsController.prototype.putMarker = function (event) {
 		title: 'The title',
 		icon: $this.markerImageBorn
 	    });
+	    $this.currentMarkerLocation.push(marker);
+	    
 	    var score = $this.getDistance(event.latLng, marker.position);
 	    View.appendResult(score);
 	    Game.calculatScore(score);
@@ -121,13 +132,14 @@ MapsController.prototype.createMarkerFriend = function (friend) {
 	// Si la recherche à fonctionné
 	if(status == google.maps.GeocoderStatus.OK) {
 	    // Création du Marker
-	    $this.currentMarkerLocation = new google.maps.Marker({
+	    var marker = new google.maps.Marker({
 		// Coordonnées
 		position: results[0].geometry.location,
 		map: $this.map,
 		title: 'The title',
 		icon: $this.markerImageBorn
 	    });
+	    $this.currentMarkerLocation.push(marker);
 	}
     });
 }
@@ -143,10 +155,3 @@ MapsController.prototype.getDistance = function(p1, p2){
     
     return d.toFixed(3);
 }
-
-google.maps.Map.prototype.clearMarkers = function() {
-    for(var i=0; i<this.markers.length; i++){
-        this.markers[i].setMap(null);
-    }
-    this.markers = new Array();
-};

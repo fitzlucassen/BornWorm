@@ -18,6 +18,14 @@ $(document).ready(function () {
     // Get geolocalisation
     Maps.getGeolocalisation();
     initializeMaps();
+    
+    setTimeout(function() {
+	FB.getLoginStatus(function(response){
+	    if (response.status === 'connected') {
+		Facebook.connect();
+	    }
+	});
+    },2000);
 
     $('.button-facebook > span').click(function(){
 	// Facebook connect + demande utilisateur
@@ -84,7 +92,19 @@ $(document).ready(function () {
 	$('#error-view').fadeOut('slow');
     });
 });
-	
+
+function start(){
+    ErrorGame.appendIfNoGeoloc();
+
+    setTimeout(function(){
+	ErrorGame.appendIfNoData();
+	ErrorGame.disableIfNoFriendsEnough();
+
+	// On limite l'accès au jeu si pas de like
+	Facebook.limitGameIfNoLike();
+	View.refreshAfterConnect();
+    },500);
+}
 function initializeMaps(friend) {	
     // Récupérer la position peut prendre un peu de temps. D'où un délai de 1s avant la suite
     setTimeout(function () {
