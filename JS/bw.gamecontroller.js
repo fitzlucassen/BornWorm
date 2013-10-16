@@ -41,9 +41,12 @@ GameController.prototype.getClassement = function(){
 	type: "POST",
 	url: 'Script/bw.utilities.php',
 	data: json,
+	dataType: json,
 	success: function(data){
-	    console.log(data);
-	},
-	dataType: json
+	    var cpt = 0;
+	    for(cpt = 0; cpt < data.length; cpt++){
+		console.log(data[cpt].id);
+	    }
+	}
     });
 }

@@ -20,6 +20,7 @@ function MapsController(){
     
     // Marker de la vrai ville de naissance
     this.currentMarker = {};
+    this.currentMarkerLocation = {};
     // Map
     this.map = {};
     // Pour futur gestion du nombre d'essai
@@ -42,8 +43,15 @@ MapsController.prototype.initialyze = function (friend) {
 	$this.putMarker(event);
     });
     
-    // Et on pose le marker sur la ville actuelle de l'ami tiré au sort
-    $this.createMarkerFriend(friend);
+    if(friend){
+	// Et on pose le marker sur la ville actuelle de l'ami tiré au sort
+	$this.createMarkerFriend(friend);
+    }
+}
+MapsController.prototype.cleanMarkers = function(friend){
+    this.map.clearMarkers();
+    // On pose le marker sur la ville actuelle de l'ami tiré au sort
+    this.createMarkerFriend(friend);
 }
 
 MapsController.prototype.getGeolocalisation = function(){
@@ -113,7 +121,7 @@ MapsController.prototype.createMarkerFriend = function (friend) {
 	// Si la recherche à fonctionné
 	if(status == google.maps.GeocoderStatus.OK) {
 	    // Création du Marker
-	    var myMarker = new google.maps.Marker({
+	    $this.currentMarkerLocation = new google.maps.Marker({
 		// Coordonnées
 		position: results[0].geometry.location,
 		map: $this.map,
@@ -123,7 +131,6 @@ MapsController.prototype.createMarkerFriend = function (friend) {
 	}
     });
 }
-
 MapsController.prototype.getDistance = function(p1, p2){
     var R = 6371; // rayon en km de la terre
     var dLat  = rad(p2.lat() - p1.lat());
@@ -136,3 +143,10 @@ MapsController.prototype.getDistance = function(p1, p2){
     
     return d.toFixed(3);
 }
+
+google.maps.Map.prototype.clearMarkers = function() {
+    for(var i=0; i<this.markers.length; i++){
+        this.markers[i].setMap(null);
+    }
+    this.markers = new Array();
+};

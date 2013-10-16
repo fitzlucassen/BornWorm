@@ -17,6 +17,7 @@ $(document).ready(function () {
     
     // Get geolocalisation
     Maps.getGeolocalisation();
+    initializeMaps();
 
     $('.button-facebook > span').click(function(){
 	// Facebook connect + demande utilisateur
@@ -47,7 +48,7 @@ $(document).ready(function () {
 	View.appendNewName(Facebook.response[cptFriends].name, 'https://graph.facebook.com/' + Facebook.response[cptFriends].id + '/picture');
 
 	// On initialise la maps avec le premier ami de la liste
-	initializeMaps(Facebook.response[cptFriends]);
+	Maps.cleanMarkers(Facebook.response[cptFriends]);
 	cptFriends++;
     });
     
@@ -75,7 +76,7 @@ $(document).ready(function () {
             View.appendNewName(Facebook.response[cptFriends].name, 'https://graph.facebook.com/' + Facebook.response[cptFriends].id + '/picture');
         }
 	// On initialise la maps avec le premier ami de la liste
-	initializeMaps(Facebook.response[cptFriends]);
+	Maps.cleanMarkers(Facebook.response[cptFriends]);
 	cptFriends++;
     });
     

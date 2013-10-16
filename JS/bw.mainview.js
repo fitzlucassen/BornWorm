@@ -24,7 +24,13 @@ MainView.prototype.refreshAfterConnect = function(){
 MainView.prototype.startGame = function(){
     $('#explanation').css({display: 'none'});
     $('#map-canvas').css({display: 'block'});
-    $('#menu-canvas').css({display: 'block'});
+    $('#menu-canvas').animate({width:'0%'},1000);
+    $('header').fadeOut('slow');
+    
+    setTimeout(function(){
+	$('#menu-bar').css({display:'block'});
+	$('#menu-canvas').animate({width:'350px'});
+    },1000);
 }
 MainView.prototype.nextFriend = function(){
     $('#result').css({display: 'none'});

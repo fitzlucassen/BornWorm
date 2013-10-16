@@ -1,20 +1,16 @@
 #global{
     height: 100%;
     margin: auto;
-    background: #eee url(../Images/maps-wallpaper.jpg) center center no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
 }
 header{
-    background: rgba(199,210,199, 0.8);
     border-bottom: 1px solid #111;
     height: 50px;
-    color: #FFFFFF;
+    color: #000000;
     text-align: center;
     font-size: 26px;
     font-family: Georgia;
     padding-top: 20px;
-    text-shadow: 1px 1px 1px rgba(247,249,248,0.6);
+    text-shadow: 1px 1px 1px rgba(10,11,12,0.6);
 }
 #result, #friend, #gameOver, #score, #error-view{
     display: none;
@@ -26,7 +22,6 @@ header{
     margin-top: 250px;
     font-family: monospace;
     line-height: 24px;
-    background: rgba(199,210,199, 0.8);
     padding: 20px 0;
     color: #027c77;
 }
