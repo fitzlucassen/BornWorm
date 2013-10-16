@@ -47,6 +47,7 @@ GameController.prototype.getClassement = function(){
 	    for(cpt = 0; cpt < data.length; cpt++){
 		console.log(data[cpt].id);
 	    }
-	}
+	},
+	error : function(data) { console.log(data) }
     });
 }

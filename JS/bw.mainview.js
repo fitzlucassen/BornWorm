@@ -41,13 +41,10 @@ MainView.prototype.appendScore = function(score){
     $('#scoreLabel').html(score + ' points');
 }
 MainView.prototype.appendShare = function(score){
+    $('#menu-canvas').animate({width:'100%'},1000);
+    $('#menu-canvas').css({'text-align':'center'});
+    $('#menu-bar, #score').css({width:'100%'});
     $('#gameOver').css({'margin-top':(clientHeight/2-60)});
-    var m = $('meta');
-    var cpt = 0;
-    for(cpt = 0; cpt < m.length; cpt++){
-	if($(m[cpt]).attr('property') == 'og:description')
-	    $(m[cpt]).attr('content', 'J\'ai fait ' + score + ' points à Bornworm. Peux-tu faire mieux ?');
-    }
     
     $('#score').append('<br/><p><a href="#" onclick="window.open(\'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href) + '\', \'facebook-share-dialog\', \'width=626,height=436\');return false;">Partagez votre score sur Facebook</a></p>');
     $('#score').append('<br/><div id="invitation-module"></div>');
