@@ -83,66 +83,91 @@
 	    }(document, 'script', 'facebook-jssdk'));
 	</script>
 	<div id="global">
-	    <header>
-                WELCOME TO BORNWORM !
-	    </header>
+		<div id="map-canvas">
+		    <header>
+	                WELCOME TO BORNWORM !
+		    </header>
 
-	    <div id="layout">
-		<div id="explanation">
-		    <div class="facebook">
-			<span class="button button-facebook min-margin">
-			    <span>
-				<a href="#">Connectez-vous</a>
-			    </span>
-			</span>
-		    </div>
-		    <div id="explanationPresentation" style="display:none;">
-			<p>
-			    Le but du jeu est simple. Trouvez le lieu de naissance de vos amis. <br />
-			    Cliquez sur la carte pour valider votre choix.<br />
-			    Vous n'avez qu'un seul indice : le lieu de résidence actuel de votre ami.
-			</p>
-			<br />
-			<p class="questionStart">
-			    Avec combien d'amis voulez-vous jouer ?
-			</p>
-			<input type="radio" name="nbFriends" class="nbFriends" id="nbFriends5" value="5" /><label for="nbFriends5">5</label>
-			<input type="radio" name="nbFriends" class="nbFriends" id="nbFriends10" value="10" /><label for="nbFriends10">10</label>
-			<input type="radio" name="nbFriends" class="nbFriends" id="nbFriends15" value="15" /><label for="nbFriends15">15</label>
+		    <div id="layout">
+			<div id="explanation">
+			    <div class="facebook">
+				<span class="button button-facebook min-margin">
+				    <span>
+					<a href="#">Connectez-vous</a>
+				    </span>
+				</span>
+			    </div>
+			    <div id="explanationPresentation" style="display:none;">
+				<p>
+				    Le but du jeu est simple. Trouvez le lieu de naissance de vos amis. <br />
+				    Cliquez sur la carte pour valider votre choix.<br />
+				    Vous n'avez qu'un seul indice : le lieu de résidence actuel de votre ami.
+				</p>
+				<br />
+				<p class="questionStart">
+				    Avec combien d'amis voulez-vous jouer ?
+				</p>
+				<input type="radio" name="nbFriends" class="nbFriends" id="nbFriends5" value="5" /><label for="nbFriends5">5</label>
+				<input type="radio" name="nbFriends" class="nbFriends" id="nbFriends10" value="10" /><label for="nbFriends10">10</label>
+				<input type="radio" name="nbFriends" class="nbFriends" id="nbFriends15" value="15" /><label for="nbFriends15">15</label>
+				
+				<br/>
+				<div class="fb-like" data-href="https://www.facebook.com/bornworm" data-width="80" data-height="80" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="true" data-send="true"></div>
+				<br/>
+			    </div>
+			</div>
 			
-			<br/>
-			<div class="fb-like" data-href="https://www.facebook.com/bornworm" data-width="80" data-height="80" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="true" data-send="true"></div>
-			<br/>
+			
+	                <div id="gameOver">
+	                    <p>Merci d'avoir joué !</p>
+	                </div>
+			<div id="error-view">
+			    <span id="close-error">X</span>
+			</div>
+			
+			<!-- ZONE DE JEU -->
+			<div style="display:none;">
+			</div>
+			<!-- FIN ZONE DE JEU -->
+			
+			
+			<div id="position" data-lat="" data-lng="" data-alt=""></div>
 		    </div>
-		</div>
-		
-		<div id="friend">
-		    <p>Ami à trouver : <br /><span id="friendName"></span><img src="" alt=""/></p>
-		</div>
-		<div id="result">
-		    <p>Vous êtes à <span id="distance"></span> !</p>
-		    <input type="button" value="Ami suivant" id="nextFriend"/>
-		</div>
-                <div id="gameOver">
-                    <p>Merci d'avoir joué !</p>
-                </div>
-		<div id="error-view">
-		    <span id="close-error">X</span>
-		</div>
-		
-		<!-- ZONE DE JEU -->
-		<div id="map-canvas" style="display:none;">
-		</div>
-		<!-- FIN ZONE DE JEU -->
-		
-		<div id="score">
-		    <p>Votre score est de : <span id="scoreLabel">0 points</span></p>
-		</div>
-		<div id="position" data-lat="" data-lng="" data-alt=""></div>
-	    </div>
 
-	    <footer>
-	    </footer>
+		    <footer>
+		    </footer>
+		</div>
+		<div id="result" style="position: absolute;bottom: 50px;background: rgba(255,255,255,0.8);box-shadow: 0px 0px 1px rgba(100,100,100,0.8);">
+			<div style="padding: 16px;float: right;font-size: 1.5em;background: rgba(170,170,170,0.6);color: black;font-weight: bold;cursor: pointer;"  id="nextFriend">
+				Ami suivant >
+			</div>
+			<div style="overflow: hidden;">
+				<div style="padding: 11px;">
+				    <p>Vous êtes à <span id="distance"></span> !</p>
+				</div>
+			</div>
+			
+		</div>
+		<div id="menu-canvas" style="display: none;right: 0px;top: 0px;position: absolute;width: 350px;height: 100%;background: rgba(255,255,255,0.8);box-shadow: -1px 0px 1px rgba(100,100,100,0.8);">
+			<div style="position: relative;width: 350px;height: 100%;">
+				<div style="padding: 20px;font-size: 2.5em;color: black;font-weight: bold;">
+
+					BornWorm
+
+				</div>
+				<div id="liste-friends" style="overflow: auto;">
+					<!-- mettre en JS un max-height pour le scrolle auto si ça depasse -->
+					<div id="friend">
+						<span style="display: block;margin-bottom: 15px;font-size: 1.5em;">Ami à trouver : </span>
+					    <p><img src="" alt=""/><span id="friendName"></span></p>
+					</div>
+				</div>
+				<div id="score">
+					<span style="display: block;margin-bottom: 15px;font-size: 1.5em;">Score : </span>
+				    <p><span id="scoreLabel">0 points</span></p>
+				</div>
+			</div>
+		</div>
 	</div>
     </body>
 </html>

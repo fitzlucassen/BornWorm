@@ -51,7 +51,7 @@ $(document).ready(function () {
 	cptFriends++;
     });
     
-    $('#layout').on('click', '#nextFriend', function(){
+    $('#result').on('click', '#nextFriend', function(){
 	// On cache les div de l'ancien ami
 	View.nextFriend();
 	

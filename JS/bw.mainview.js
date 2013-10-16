@@ -3,13 +3,13 @@ function MainView() {
 }
 
 MainView.prototype.appendResult = function(result){
-    $('#distance').html(result + 'km de ' + Facebook.response[cptFriends-1].hometown);
+    $('#distance').html(result + 'km de <br />' + Facebook.response[cptFriends-1].hometown);
     $('#result').fadeIn('slow');
 }
 
 MainView.prototype.appendNewName = function(name, picture){
     $('#friendName').html(name);
-    $('#friendName + img').attr('src', picture);
+    $('#friend img').attr('src', picture);
     $('#friendName + img').attr('alt', 'Photo de ' + name);
 
 
@@ -24,13 +24,14 @@ MainView.prototype.refreshAfterConnect = function(){
 MainView.prototype.startGame = function(){
     $('#explanation').css({display: 'none'});
     $('#map-canvas').css({display: 'block'});
+    $('#menu-canvas').css({display: 'block'});
 }
 MainView.prototype.nextFriend = function(){
     $('#result').css({display: 'none'});
     $('#friend').css({display: 'none'});
 }
 MainView.prototype.appendScore = function(score){
-    $('#scoreLabel').html(score + ' points.');
+    $('#scoreLabel').html(score + ' points');
 }
 MainView.prototype.appendShare = function(score){
     var m = document.createElement('meta');

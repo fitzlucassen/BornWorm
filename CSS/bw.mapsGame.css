@@ -43,9 +43,20 @@ header{
 }
 #friend img{
     vertical-align: middle;
-    margin-left: 10px;
+    margin-right: 10px;
 }
-#friend, #result, #gameOver, #score{
+#friend {
+    padding: 20px;
+    padding-top: 0px;
+}
+#score {
+    position: absolute;
+    padding: 20px;
+    bottom: 0px;
+    width: 310px;
+    right: 0px;
+}
+#result, #gameOver, {
     width: 500px;
     margin: 50px auto 0 auto;
     text-align: center;
@@ -120,9 +131,9 @@ header{
     -moz-border-top-right-radius: 0;
     -o-border-top-right-radius: 0;
 }
-#score a{
-    text-decoration: underline;
-    color: #fff;
+#score #scoreLabel{
+    font-size: 2em;
+    color: black;
 }
 
 
