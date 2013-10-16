@@ -42,10 +42,12 @@ MainView.prototype.appendScore = function(score){
 }
 MainView.prototype.appendShare = function(score){
     $('#gameOver').css({'margin-top':(clientHeight/2-60)});
-    var m = document.createElement('meta');
-    m.setAttribute('property', 'og:description');
-    m.setAttribute('content', 'J\'ai fait ' + score + ' points à Bornworm. Peux-tu faire mieux ?');
-    document.getElementsByTagName('head')[0].appendChild(m);
+    var m = $('meta');
+    var cpt = 0;
+    for(cpt = 0; cpt < m.length; cpt++){
+	if($(m[cpt]).attr('property') == 'og:description')
+	    $(m[cpt]).attr('content', 'J\'ai fait ' + score + ' points à Bornworm. Peux-tu faire mieux ?');
+    }
     
     $('#score').append('<br/><p><a href="#" onclick="window.open(\'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href) + '\', \'facebook-share-dialog\', \'width=626,height=436\');return false;">Partagez votre score sur Facebook</a></p>');
     $('#score').append('<br/><div id="invitation-module"></div>');

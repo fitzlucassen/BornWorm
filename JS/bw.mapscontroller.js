@@ -40,7 +40,8 @@ MapsController.prototype.initialyze = function (friend) {
     var $this = this;
     // On ajoute le listener pour la pose de marqueur au click
     google.maps.event.addListener(this.map, 'click', function (event) {
-	$this.putMarker(event);
+	if($this.currentMarkers.length == 0 && !endOfGame)
+	    $this.putMarker(event);
     });
     
     if(friend){
@@ -111,7 +112,7 @@ MapsController.prototype.putMarker = function (event) {
 	    
 	    var score = $this.getDistance(event.latLng, marker.position);
 	    View.appendResult(score);
-	    Game.calculatScore(score);
+	    Game.calculatScore(score.replace(',','.'));
 	    View.appendScore(Game.getScore());
 	}
     });
@@ -154,5 +155,7 @@ MapsController.prototype.getDistance = function(p1, p2){
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c;
     
-    return d.toFixed(3);
+    var result = Math.round(d.toFixed(3)*100)/100;
+    
+    return (result + '').replace('.',',');
 }

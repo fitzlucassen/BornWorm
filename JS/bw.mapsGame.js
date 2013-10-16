@@ -7,6 +7,7 @@ var ErrorGame = {};
 var clientHeight = $(window).height() - 211;
 var cptFriends = 0;
 var logged = false;
+var endOfGame = false;
 
 $(document).ready(function () {
     // Initialisation des controllers
@@ -59,9 +60,11 @@ $(document).ready(function () {
 	
 	// Si on a fini
 	if(Facebook.response.length == cptFriends){
+	    endOfGame = true;
 	    // On cache les div de jeu
             $('#result').fadeOut('slow');
             $('#friend').fadeOut('slow');
+	    $('#nextFriend').fadeOut('slow');
 	    // On affiche les div de fin
             $('#gameOver').fadeIn('slow');
 	    View.appendShare(Game.getScore());

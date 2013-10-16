@@ -25,9 +25,10 @@
 	return $scores;
     }
     function SaveScoreInTable($values){
-	$fp = fopen ("../score.txt", "w+");
+	$fp = fopen ("../score.txt", "a+");
 	
-	fputs($fp, $values['id']. ':' . $values['name'] . ',' . $values['score']);
+	fputs($fp, $values['id']. ':' . $values['name'] . ',' . $values['score'] . "\n");
+
 	fclose ($fp);
     }
 ?>
