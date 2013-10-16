@@ -140,6 +140,7 @@ MapsController.prototype.createMarkerFriend = function (friend) {
 		icon: $this.markerImageBorn
 	    });
 	    $this.currentMarkerLocation.push(marker);
+	    $this.map.panTo(results[0].geometry.location);
 	}
     });
 }

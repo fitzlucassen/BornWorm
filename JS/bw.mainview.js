@@ -8,10 +8,10 @@ MainView.prototype.appendResult = function(result){
 }
 
 MainView.prototype.appendNewName = function(name, picture){
-    $('#friendName').html(name);
-    $('#friend img').attr('src', picture);
-    $('#friendName + img').attr('alt', 'Photo de ' + name);
-
+    $('.newimage').removeClass('newimage');
+    $('#friendName').prepend('<img class="newimage" src="" alt=""/>' + name + '<br/><br/>');
+    $('#friend .newimage').attr('src', picture);
+    $('#friend .newimage').attr('alt', 'Photo de ' + name);
 
     $('#friend').fadeIn('slow');
     $('#score').fadeIn('slow');
@@ -26,6 +26,7 @@ MainView.prototype.startGame = function(){
     $('#map-canvas').css({display: 'block'});
     $('#menu-canvas').animate({width:'0%'},1000);
     $('header').fadeOut('slow');
+    $('#liste-friends').css({'max-height': clientHeight});
     
     setTimeout(function(){
 	$('#menu-bar').css({display:'block'});
@@ -40,6 +41,7 @@ MainView.prototype.appendScore = function(score){
     $('#scoreLabel').html(score + ' points');
 }
 MainView.prototype.appendShare = function(score){
+    $('#gameOver').css({'margin-top':(clientHeight/2-60)});
     var m = document.createElement('meta');
     m.setAttribute('property', 'og:description');
     m.setAttribute('content', 'J\'ai fait ' + score + ' points à Bornworm. Peux-tu faire mieux ?');

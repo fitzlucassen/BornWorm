@@ -4,6 +4,7 @@ var View = {};
 var Game = {};
 var ErrorGame = {};
 
+var clientHeight = $(window).height() - 211;
 var cptFriends = 0;
 var logged = false;
 
@@ -23,6 +24,7 @@ $(document).ready(function () {
 	FB.getLoginStatus(function(response){
 	    if (response.status === 'connected') {
 		Facebook.connect();
+		start();
 	    }
 	});
     },2000);
@@ -31,16 +33,7 @@ $(document).ready(function () {
 	// Facebook connect + demande utilisateur
 	if(!logged){
 	    Facebook.connect();
-	    ErrorGame.appendIfNoGeoloc();
-
-	    setTimeout(function(){
-		ErrorGame.appendIfNoData();
-		ErrorGame.disableIfNoFriendsEnough();
-		
-		// On limite l'accès au jeu si pas de like
-		Facebook.limitGameIfNoLike();
-		View.refreshAfterConnect();
-	    },500);
+	    start();
 	}
     });
     
