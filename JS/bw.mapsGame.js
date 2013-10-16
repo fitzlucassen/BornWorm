@@ -89,14 +89,12 @@ $(document).ready(function () {
 function start(){
     ErrorGame.appendIfNoGeoloc();
 
-    setTimeout(function(){
-	ErrorGame.appendIfNoData();
-	ErrorGame.disableIfNoFriendsEnough();
+    ErrorGame.appendIfNoData();
+    ErrorGame.disableIfNoFriendsEnough();
 
-	// On limite l'accès au jeu si pas de like
-	Facebook.limitGameIfNoLike();
-	View.refreshAfterConnect();
-    },500);
+    // On limite l'accès au jeu si pas de like
+    Facebook.limitGameIfNoLike();
+    View.refreshAfterConnect();
 }
 function initializeMaps(friend) {	
     // Récupérer la position peut prendre un peu de temps. D'où un délai de 1s avant la suite
