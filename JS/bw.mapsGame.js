@@ -67,6 +67,7 @@ $(document).ready(function () {
 	    $('#nextFriend').fadeOut('slow');
 	    // On affiche les div de fin
             $('#gameOver').fadeIn('slow');
+             $('#history').fadeOut('slow');
 	    View.appendShare(Game.getScore());
 	    // On récupère tous les amis pour l'invitation
 	    View.appendRequest();
