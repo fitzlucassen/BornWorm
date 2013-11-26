@@ -91,12 +91,12 @@
 	    <div id="map-canvas">
 	    </div>
 	    
-	    <div id="menu-canvas" style="right: 0px;top: 0px;position: absolute;width: 100%;height: 100%;background: rgba(255,255,255,0.8);box-shadow: -1px 0px 1px rgba(100,100,100,0.8);">
+	    <div id="menu-canvas">
 		<header>
 		    WELCOME TO BORNWORM
 		</header>
 		<div id="layout">
-		    <div id="explanation" style="margin-top: 170px;color: #4D4D4D;">
+		    <div id="explanation">
 			<p>
 			    Le but du jeu est simple. Trouvez le lieu de naissance de vos amis. <br />
 			    Cliquez sur la carte pour valider votre choix.<br />
@@ -137,38 +137,38 @@
 
 		    <div id="position" data-lat="" data-lng="" data-alt=""></div>
 		</div>
-		<div id="menu-bar" style="display:none;position: relative;width: 350px;height: 100%;">
-		    <div style="padding: 20px;font-size: 2.5em;color: black;font-weight: bold;">
+		<div id="menu-bar">
+		    <div class="title">
 			BornWorm
 		    </div>
 		    <div id="gameOver">
 				<p>Merci d'avoir joué !</p>
 		    </div>
-		    <div id="liste-friends" style="overflow: auto;">
+		    <div id="liste-friends">
 				<!-- mettre en JS un max-height pour le scrolle auto si ça depasse -->
 				<div id="friend">
-				    <span style="display: block;margin-bottom: 15px;font-size: 1.5em;">Ami à trouver : </span>
+				    <span class="title-list">Ami à trouver : </span>
 				    <div id="friend-to-find"></div>
 				</div>
 				<div id="history">
-				    <span style="display: block;margin-bottom: 15px;font-size: 1.5em;">Historique : </span>
+				    <span class="title-list">Historique : </span>
 				    <div class="list"></div>
 				</div>
 		    </div>
 		    <div id="score">
-				<span style="display: block;margin-bottom: 15px;font-size: 1.5em;">Score : </span>
+				<span class="score-title">Score : </span>
 				<p><span id="scoreLabel">0 points</span></p>
 		    </div>
 		</div>
 	    </div>
-	    <div id="result" style="position: absolute;height: 100%;top: 0px;height: 0px;left: 0px;width: 100%;background: rgba(255,255,255,0.8);box-shadow: 0px 0px 1px rgba(100,100,100,0.8);">
-			<div style="width: 70%;max-width: 600px;margin: auto;margin-top: 10%;border: 1px solid rgba(123,123,123,0.6);border-radius: 5px;background: white;">
-				<div style="padding: 16px;float: right;font-size: 1.5em;background: rgba(170,170,170,0.6);color: black;font-weight: bold;cursor: pointer;"  id="nextFriend">
+	    <div id="result">
+			<div id="result-box">
+				<div id="nextFriend">
 				    Ami suivant >
 				</div>
-				<div style="overflow: hidden;">
-				    <div style="padding: 11px;">
-					<p>Vous êtes à <span id="distance"></span> !</p>
+				<div class="message-content">
+				    <div class="padding">
+						<p>Vous êtes à <span id="distance"></span> !</p>
 				    </div>
 				</div>
 			</div>
