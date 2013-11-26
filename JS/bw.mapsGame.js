@@ -90,8 +90,6 @@ $(document).ready(function () {
 });
 
 function start(){
-    ErrorGame.appendIfNoGeoloc();
-
     ErrorGame.appendIfNoData();
     ErrorGame.disableIfNoFriendsEnough();
 
