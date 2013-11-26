@@ -7,10 +7,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<meta name="Description" content="Devinnez où habitent vos amis avec BornWorm !" >
-	<meta name="Author" content="Dulon Thibault, Nitoumbi Ludovic">
+	<meta name="Author" content="Dulon Thibault, Deneuve Quentin, Ettou Richard, Bicheux Jonathan">
 
 	<meta name="Revisit-after" content="15 days">
-	<meta name="Publisher" content="Dulon Thibault, Nitoumbi Ludovic">
+	<meta name="Publisher" content="Dulon Thibault, Deneuve Quentin, Ettou Richard, Bicheux Jonathan">
 	<meta name="Robots" content="index, follow, all">
 	<meta name="Rating" content="general">
 	<meta name="Language" content="fr">
@@ -90,17 +90,7 @@
 	<div id="global">
 	    <div id="map-canvas">
 	    </div>
-	    <div id="result" style="position: absolute;bottom: 50px;background: rgba(255,255,255,0.8);box-shadow: 0px 0px 1px rgba(100,100,100,0.8);">
-		<div style="padding: 16px;float: right;font-size: 1.5em;background: rgba(170,170,170,0.6);color: black;font-weight: bold;cursor: pointer;"  id="nextFriend">
-		    Ami suivant >
-		</div>
-		<div style="overflow: hidden;">
-		    <div style="padding: 11px;">
-			<p>Vous êtes à <span id="distance"></span> !</p>
-		    </div>
-		</div>
-
-	    </div>
+	    
 	    <div id="menu-canvas" style="right: 0px;top: 0px;position: absolute;width: 100%;height: 100%;background: rgba(255,255,255,0.8);box-shadow: -1px 0px 1px rgba(100,100,100,0.8);">
 		<header>
 		    WELCOME TO BORNWORM
@@ -125,11 +115,18 @@
 			    <p class="questionStart">
 				Avec combien d'amis voulez-vous jouer ?
 			    </p>
-			    <input type="radio" name="nbFriends" class="nbFriends" id="nbFriends5" value="5" /><label for="nbFriends5">5</label>
-			    <input type="radio" name="nbFriends" class="nbFriends" id="nbFriends10" value="10" /><label for="nbFriends10">10</label>
-			    <input type="radio" name="nbFriends" class="nbFriends" id="nbFriends15" value="15" /><label for="nbFriends15">15</label>
-
-			    <br/>
+			     <div id="number-box">
+				    <div class="button-number left nbFriends" data-value="5">
+				    	5
+				    </div>
+				    <div class="button-number middle nbFriends" data-value="10">
+				    	10
+				    </div>
+				    <div class="button-number right nbFriends" data-value="15">
+				    	15
+				    </div>
+				    <div class="cboth"></div>
+				</div>
 			    <div class="fb-like" data-href="https://www.facebook.com/bornworm" data-width="80" data-height="80" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="true" data-send="true"></div>
 			    <br/>
 			</div>
@@ -145,20 +142,36 @@
 			BornWorm
 		    </div>
 		    <div id="gameOver">
-			<p>Merci d'avoir joué !</p>
+				<p>Merci d'avoir joué !</p>
 		    </div>
 		    <div id="liste-friends" style="overflow: auto;">
-			<!-- mettre en JS un max-height pour le scrolle auto si ça depasse -->
-			<div id="friend">
-			    <span style="display: block;margin-bottom: 15px;font-size: 1.5em;">Ami à trouver : </span>
-			    <p><span id="friendName"></span></p>
-			</div>
+				<!-- mettre en JS un max-height pour le scrolle auto si ça depasse -->
+				<div id="friend">
+				    <span style="display: block;margin-bottom: 15px;font-size: 1.5em;">Ami à trouver : </span>
+				    <div id="friend-to-find"></div>
+				</div>
+				<div id="history">
+				    <span style="display: block;margin-bottom: 15px;font-size: 1.5em;">Historique : </span>
+				    <div class="list"></div>
+				</div>
 		    </div>
 		    <div id="score">
-			<span style="display: block;margin-bottom: 15px;font-size: 1.5em;">Score : </span>
-			<p><span id="scoreLabel">0 points</span></p>
+				<span style="display: block;margin-bottom: 15px;font-size: 1.5em;">Score : </span>
+				<p><span id="scoreLabel">0 points</span></p>
 		    </div>
 		</div>
+	    </div>
+	    <div id="result" style="position: absolute;height: 100%;top: 0px;height: 0px;left: 0px;width: 100%;background: rgba(255,255,255,0.8);box-shadow: 0px 0px 1px rgba(100,100,100,0.8);">
+			<div style="width: 70%;max-width: 600px;margin: auto;margin-top: 10%;border: 1px solid rgba(123,123,123,0.6);border-radius: 5px;background: white;">
+				<div style="padding: 16px;float: right;font-size: 1.5em;background: rgba(170,170,170,0.6);color: black;font-weight: bold;cursor: pointer;"  id="nextFriend">
+				    Ami suivant >
+				</div>
+				<div style="overflow: hidden;">
+				    <div style="padding: 11px;">
+					<p>Vous êtes à <span id="distance"></span> !</p>
+				    </div>
+				</div>
+			</div>
 	    </div>
 	</div>
     </body>

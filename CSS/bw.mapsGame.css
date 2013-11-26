@@ -2,6 +2,9 @@
     height: 100%;
     margin: auto;
 }
+.cboth {
+    clear: both;
+}
 header{
     
     height: 50px;
@@ -36,16 +39,52 @@ header{
 #explanation input{
     margin-right: 10px;
 }
-#friend span#friendName{
+#explanation #number-box {
+    margin: auto;
+    width: 510px;
+    margin-top: 15px;
+    margin-bottom: 35px;
+}
+#explanation #number-box .button-number {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid rgba(123,123,123,0.6);
+    text-align: center;
+    float: left;
+    background: white;
+}
+#explanation #number-box .button-number:hover {
+    background: #F9F9F9;
+}
+#explanation #number-box .left {
+    border-radius: 5px 0px 0px 5px;
+    border-right: none;
+    width: 149px;
+}
+#explanation #number-box .middle {
+    width: 148px;
+}
+#explanation #number-box .right {
+    border-radius: 0px 5px 5px 0px;
+    border-left: none;
+    width: 149px;
+}
+.friend-box {
+    background: #F9F9F9;
+    border: 1px solid rgba(123,123,123,0.6);
+    border-radius: 5px;
+    overflow: hidden;
+    background: white;
+    margin-bottom: 20px;
     font-weight: bold;
     font-size: 20px;
-    vertical-align: middle
+    vertical-align: middle;
 }
-#friend img{
+.friend-box img{
     vertical-align: middle;
     margin-right: 10px;
 }
-#friend {
+#friend, #history {
     padding: 20px;
     padding-top: 0px;
 }
