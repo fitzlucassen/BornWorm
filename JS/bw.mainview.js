@@ -26,6 +26,7 @@ MainView.prototype.refreshAfterConnect = function(){
 MainView.prototype.startGame = function(){
     $('#explanation').css({display: 'none'});
     $('#map-canvas').css({display: 'block'});
+    $('#error-view').css({display:'none'});
     $('#menu-canvas').animate({width:'0%'},1000);
     $('header').fadeOut('slow');
     $('#liste-friends').css({'max-height': clientHeight});
