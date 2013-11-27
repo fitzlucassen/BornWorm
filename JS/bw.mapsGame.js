@@ -72,8 +72,6 @@ $(document).ready(function () {
 	    View.appendRequest();
 	    // On sauvegarde
 	    Game.saveScore(Game.getScore());
-	    // Et on affiche le classement
-	    Game.getClassement();
         }
         else{
 	    // Sinon on passe au suivant
