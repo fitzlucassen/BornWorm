@@ -9,9 +9,11 @@ MainView.prototype.appendResult = function(result){
 
 MainView.prototype.appendNewName = function(name, picture){
     $('.newimage').removeClass('newimage');
-    $('#friendName').prepend('<img class="newimage" src="" alt=""/>' + name + '<br/><br/>');
-    $('#friend .newimage').attr('src', picture);
-    $('#friend .newimage').attr('alt', 'Photo de ' + name);
+    $('#history .list').prepend($('.lastFriend'));
+    $('.lastFriend').removeClass('lastFriend').addClass('friend-box');
+    $('#friend-to-find').prepend('<div class="lastFriend friend-box"><img class="newimage" src="" alt=""/>' + name + '</div>');
+    $('#friend-to-find .newimage').attr('src', picture);
+    $('#friend-to-find .newimage').attr('alt', 'Photo de ' + name);
 
     $('#friend').fadeIn('slow');
     $('#score').fadeIn('slow');
@@ -24,6 +26,7 @@ MainView.prototype.refreshAfterConnect = function(){
 MainView.prototype.startGame = function(){
     $('#explanation').css({display: 'none'});
     $('#map-canvas').css({display: 'block'});
+    $('#error-view').css({display:'none'});
     $('#menu-canvas').animate({width:'0%'},1000);
     $('header').fadeOut('slow');
     $('#liste-friends').css({'max-height': clientHeight});

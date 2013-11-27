@@ -36,6 +36,9 @@ MapsController.prototype.initialyze = function (friend) {
 	this.coordonnees.alt = $('#position').attr('data-alt');
 	this.coordonnees.zoom = 14;
     }
+    else {
+	ErrorGame.appendIfNoGeoloc();
+    }
     // On créée la map
     this.map = new google.maps.Map(document.getElementById("map-canvas"), this.mapOptions);
     var $this = this;

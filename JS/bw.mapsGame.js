@@ -43,9 +43,9 @@ $(document).ready(function () {
 	// On cache la div
 	View.startGame();
 	// On set l'echelle des scores
-	Game.setEchelle($(this).val());
+	Game.setEchelle($(this).data('value'));
 	// On récupère le nombre d'ami choisi en random
-	Facebook.takeXFriends(Facebook.response, $(this).val());
+	Facebook.takeXFriends(Facebook.response, $(this).data('value'));
 	// On affiche les infos de l'ami à trouver'
 	View.appendNewName(Facebook.response[cptFriends].name, 'https://graph.facebook.com/' + Facebook.response[cptFriends].id + '/picture');
 
@@ -67,6 +67,7 @@ $(document).ready(function () {
 	    $('#nextFriend').fadeOut('slow');
 	    // On affiche les div de fin
             $('#gameOver').fadeIn('slow');
+             $('#history').fadeOut('slow');
 	    View.appendShare(Game.getScore());
 	    // On récupère tous les amis pour l'invitation
 	    View.appendRequest();
@@ -88,8 +89,6 @@ $(document).ready(function () {
 });
 
 function start(){
-    ErrorGame.appendIfNoGeoloc();
-
     ErrorGame.appendIfNoData();
     ErrorGame.disableIfNoFriendsEnough();
 
