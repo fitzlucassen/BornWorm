@@ -26,6 +26,7 @@ MainView.prototype.refreshAfterConnect = function(){
 MainView.prototype.startGame = function(){
     $('#explanation').css({display: 'none'});
     $('#map-canvas').css({display: 'block'});
+    $('#error-view').css({display:'none'});
     $('#menu-canvas').animate({width:'0%'},1000);
     $('header').fadeOut('slow');
     $('#liste-friends').css({'max-height': clientHeight});
@@ -46,7 +47,6 @@ MainView.prototype.appendShare = function(score){
     $('#menu-canvas').animate({width:'100%'},1000);
     $('#menu-canvas').css({'text-align':'center'});
     $('#menu-bar, #score').css({width:'100%'});
-    $('#gameOver').css({'margin-top':(clientHeight/2-60)});
     
     $('#score').append('<br/><p><a href="#" onclick="window.open(\'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href) + '\', \'facebook-share-dialog\', \'width=626,height=436\');return false;">Partagez votre score sur Facebook</a></p>');
     $('#score').append('<br/><div id="invitation-module"></div>');
@@ -58,4 +58,14 @@ MainView.prototype.limitAccess = function(){
 MainView.prototype.appendRequest = function(){
     $('#invitation-module').html('<p><a href="#" onclick="window.open(\'https://www.facebook.com/dialog/apprequests?app_id=426080854175488&message=' + encodeURIComponent('Viens me défier à Bornworm !') + '!&redirect_uri=http://bornworm.passanger.fr/\', \'facebook-requst-dialog\', \'width=1000,height=436\');return false;">Et invitez vos amis à vous défier.</a></p>');
     $('#invitation-module').append('<br/><p><a href="#" onclick="window.location.reload();">Rejouer</a></p>');
+}
+MainView.prototype.appendClassement = function(data){
+    var cpt = 0;
+    var html = '';
+    for(cpt = 0; cpt < data.length; cpt++){
+	html += '<p><img src="https://graph.facebook.com/' + data[cpt].id + '/picture" alt=""/>';
+	html += '<span class="friendName">' + data[cpt].name + ' a fait </span><span class="scorespan">' + data[cpt].score + '</span></p><br/>';
+    }
+    $('#classement').css({'max-height': clientHeight-130});
+    $('#classement').html(html);
 }

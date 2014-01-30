@@ -1,39 +1,30 @@
 <?php
+    header('Content-Type: application/json');
     $values = $_POST;
-
+//    $values = array('toSave' => false);
+    
     if($values['toSave'] == 'true')
 	SaveScoreInTable($values);
     else
 	echo json_encode(GetScoreTable($values));
     
     function GetScoreTable($values){
-	$scores = array();
-	
-	$ligne = file_get_contents("../score.txt"); // lecture du contenu de la ligne
-	$people = explode(";", $ligne);
-		
-	foreach($people as $thisPeople){
-	    $id = explode(':', $thisPeople);
-	    $id = $id[0];
-	    
-	    if(empty($id))
-		continue;
-	    $name_array = explode(':', $thisPeople);
-	    $name = explode(',', $name_array[1]);
-	    $name = $name[0];
-	    $score = explode(',', $name_array[1]);
-	    $score = $score[1];
-	    
-	    $scores[] = array('id' => $id, 'name' => $name, 'score' => $score);
+	$scores = json_decode(file_get_contents("../score.txt")); // lecture du contenu de la ligne
+	foreach ($scores as $key => $value) {
+	    $rang[$key] = $value->score;
 	}
+	array_multisort($rang, SORT_DESC, $scores);
+	array_slice($scores, 0, 10);
+	
+	file_put_contents("../score.txt", json_encode($scores));
 	
 	return $scores;
     }
     function SaveScoreInTable($values){
-	$fp = fopen ("../score.txt", "a+");
-	
-	fputs($fp, $values['id']. ':' . $values['name'] . ',' . $values['score'] . ";");
-
-	fclose ($fp);
+	// SAVE
+	$ancient = json_decode(file_get_contents("../score.txt"));
+	$ancient[] = $values;
+	file_put_contents("../score.txt", json_encode($ancient));
+	echo json_encode('{\'ok\':\'ok\'}');
     }
 ?>

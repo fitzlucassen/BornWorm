@@ -11,7 +11,8 @@ function MapsController(){
     this.mapOptions = {
 	center: new google.maps.LatLng(this.coordonnees.lat, this.coordonnees.lng),
 	zoom: this.coordonnees.zoom,
-	mapTypeId: google.maps.MapTypeId.ROADMAP
+	mapTypeId: google.maps.MapTypeId.ROADMAP,
+	streetViewControl: false
     };
     
     // Deux type de marker différent pour différencier ville naissance/ville actuelle
